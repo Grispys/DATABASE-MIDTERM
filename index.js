@@ -51,8 +51,11 @@ async function displayMovies() {
   let query = `SELECT * FROM Movies`;
 
   try {
-    await pool.query(query)
-    console.log(query)
+    let movies = await pool.query(query)
+    // console.log(movies)
+    movies.rows.forEach((row) => {
+      console.log(row.id, "'" + row.title + "'", row.year, row.director)
+    })
   } catch (error) {
     console.error("Error getting the movies: ", error);
   }
