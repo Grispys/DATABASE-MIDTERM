@@ -41,6 +41,13 @@ const { Pool } = require('pg');
 //  WHERE movie.title = 'praline pecans';
 
 // Get the rental history for a specific movie title:
+//  SELECT rental.renter, rental.taken_date, rental.due_date
+//  FROM rentals rental
+//  JOIN movies movie ON rental.movie = movie.id
+//  WHERE movie.title = 'i am a human i swear';
+// 
+// 
+
 
 // for movie director, find customer, title movie, date of rental, from each time that movie was rented
 
