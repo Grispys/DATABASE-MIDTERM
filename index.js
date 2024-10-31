@@ -34,6 +34,11 @@ const { Pool } = require('pg');
 //    WHERE customer.email = 'matthew@yahoo.ca';
 
 // Given a movie title, list all customers who have rented the movie:
+//  SELECT customer.id, customer.fname, customer.lname
+//  FROM rentals rental
+//  JOIN customers customer ON rental.renter = customer.id
+//  JOIN movies movie ON rental.movie = movie.id
+//  WHERE movie.title = 'praline pecans';
 
 // Get the rental history for a specific movie title:
 
