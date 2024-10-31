@@ -4,8 +4,8 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: 'postgres', //This _should_ be your username, as it's the default one Postgres uses
   host: 'localhost',
-  database: 'your_database_name', //This should be changed to reflect your actual database
-  password: 'your_database_password', //This should be changed to reflect the password you used when setting up Postgres
+  database: 'DBMIDTERM', //This should be changed to reflect your actual database
+  password: 'persona', //This should be changed to reflect the password you used when setting up Postgres
   port: 5432,
 });
 
@@ -14,6 +14,16 @@ const pool = new Pool({
  */
 async function createTable() {
   // TODO: Add code to create Movies, Customers, and Rentals tables
+  let query = `CREATE TABLE IF NOT EXISTS Movies (id SERIAL PRIMARY KEY, title VARCHAR(25) NOT NULL, year VARCHAR(4) NOT NULL, genre VARCHAR(15) NOT NULL, director VARCHAR(25) NOT NULL);
+               CREATE TABLE IF NOT EXISTS Customers (id SERIAL PRIMARY KEY, email VARCHAR(25) NOT NULL, fName VARCHAR(15) NOT NULL, lName VARCHAR(15) NOT NULL, phonenum VARCHAR(10) NOT NULL);
+               CREATE TABLE IF NOT EXISTS Rentals (id SERIAL PRIMARY KEY, renter INT NOT NULL REFERENCES Customers(id) ON DELETE CASCADE, movie INT NOT NULL REFERENCES Movies(id) ON DELETE CASCADE, due DATE NOT NULL, due_date DATE NOT NULL); 
+  ` //ON DELETE CASCADE automatically removes the rental history if a movie or customer is deleted neato
+  try {
+    await pool.query(query);
+    console.log("Table's created successfully.");
+  } catch (error) {
+    console.error("Error creating tables", error);
+  }
 };
 
 /**
@@ -25,14 +35,27 @@ async function createTable() {
  * @param {string} director Director of the movie
  */
 async function insertMovie(title, year, genre, director) {
-  // TODO: Add code to insert a new movie into the Movies table
+  let query = `INSERT INTO Movies(title, year, genre, director) VALUES ('${title}', ${year}, '${genre}', '${director}')`
+  try {
+    await pool.query(query)
+    console.log("Successfully added movie to the table")
+  } catch (error) {
+    console.error("Error adding movie", error);
+  }
 };
 
 /**
  * Prints all movies in the database to the console
  */
 async function displayMovies() {
-  // TODO: Add code to retrieve and print all movies from the Movies table
+  let query = `SELECT * FROM Movies`;
+
+  try {
+    await pool.query(query)
+    console.log(query)
+  } catch (error) {
+    console.error("Error getting the movies: ", error);
+  }
 };
 
 /**
