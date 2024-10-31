@@ -1,5 +1,5 @@
 
-Here are the sample insertion queries:
+Here are the sample insertion queries AND notes on how the tables are in 3NF:
 
 
  CUSTOMERS: inserts 5 customers
@@ -59,3 +59,21 @@ QUESTIONS:
  FROM rentals
  WHERE due_date >= CURRENT_DATE;
     
+
+
+-- These 3 tables, rentals, customers, and movies, are in 3nf because they meet 1nf and 2nf standards, along with 3nf requirements.
+-- All 3 tables:
+--     each column contain only a single value per row, with only one type of data in each. There are no duplicate rows, and they all have their own primary keys. they are in 1nf.
+--     They are each in 2NF because all of their attributes rely on the primary key. there are no composite primary keys.  
+--     Finally, they are all in 3NF because they're already in 2nf, and there are no transitive dependencies. again, all of the row properties rely on just the primary key ID.
+--     As stated in the midterm project details, there is no need for more than 3 tables. That was already a good sign that no composite primary keys or transitive dependencies were going
+--     to be present so long as you didn't mess up. Also just to mention, RENTALS table has two foreign keys - one for the renter id (references customer id) and one for movie id (references movie id).
+--     The foreign keys are both dependant on primary keys from the other tables, so 3NF is not messed with.
+-- 
+-- 
+-- 
+
+
+
+
+
