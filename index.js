@@ -59,7 +59,7 @@ const { Pool } = require('pg');
 // all the cli stuff is done
 
 
-
+// also used try + catch to handle any errors that pop up
 
 
 // PostgreSQL connection
